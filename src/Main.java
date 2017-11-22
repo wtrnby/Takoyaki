@@ -4,6 +4,8 @@ import twitter4j.TwitterFactory;
 import twitter4j.Status;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.List;
 
@@ -18,15 +20,21 @@ public class Main {
         frame.setVisible(true); //ウィンドウの表示
 
         JTextArea area = new JTextArea(); //テキストエリアの作成
-        area.setPreferredSize(new Dimension(1100,700)); //サイズ指定(ウィンドウサイズに応じて変化させたい)
+        JScrollPane scrollpane = new JScrollPane(area,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollpane.setPreferredSize(new Dimension(1100, 700));
+        Border border = new BevelBorder(BevelBorder.RAISED);
+        scrollpane.setBorder(border);
         area.setFont(new Font("MS ゴシック", Font.BOLD, 24)); //フォント指定
+        area.setCaretColor(Color.YELLOW);
         area.setEditable(false); //編集不可
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
         area.setForeground(Color.white); //文字色指定
         area.setBackground(Color.BLACK); //背景色指定
         area.setText("");
-        panel.add(area);
+        panel.add(scrollpane);
 
 
         //タイムラインの表示。メソッドにしてアプリ起動時とキーでの更新に対応させたい
